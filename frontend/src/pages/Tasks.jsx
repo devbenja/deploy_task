@@ -6,12 +6,11 @@ import { useAuth } from "../context/AuthContext";
 export const Tasks = () => {
 
   const { tasks, loadTasks } = useTasks();
-  const { setLoading } = useAuth();
  
   useEffect(() => {
-    setLoading(false);
     loadTasks();
   }, []);
+
 
   if (tasks.length === 0) return (
     <div className="flex justify-center items-center h-[calc(100vh-10rem)]">

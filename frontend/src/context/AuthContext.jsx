@@ -89,7 +89,10 @@ export const AuthProvider = ({ children }) => {
                     setIsAuth(false);
                     setLoading(true);
                 })
+        } else {
+            setLoading(false);
         }
+
 
     }, []);
 
