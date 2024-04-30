@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
                     toast.error(err);
                     setUser(null);
                     setIsAuth(false);
-                    setLoading(true);
+                    setLoading(false);
                 })
         } else {
             setLoading(false);
