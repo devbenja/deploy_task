@@ -14,16 +14,16 @@ import { ClipLoader } from 'react-spinners';
 
 import { TaskProvider } from './context/TaskContext.jsx';
 
-import { PrivateRoute, PublicRoute } from './components/ProtectedRoute.jsx';
+import { ProtectedRoute } from './components/ProtectedRoute.jsx';
 
 import { useAuth } from './context/AuthContext.jsx';
 
 
 export const App = () => {
 
-  const { loading } = useAuth();
+  const { loading, isAuth } = useAuth();
 
-  if (loading){
+  if (loading) {
     return (
       <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
         <Card>
@@ -31,30 +31,29 @@ export const App = () => {
         </Card>
       </Container>
     )
-  } 
+  }
 
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path='/' exact element={<Home/>}/>
-        
-        <Route element={<PublicRoute />}>
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+        <Route exact path="/" element={<Home />} />
+        <Route element={<ProtectedRoute Authenticated={!isAuth} redirectTo="/" />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
 
-        <Route element={<PrivateRoute />}>
-          <Route element={<TaskProvider/>}>
-            <Route path='/tasks' element={<Tasks />} />
-            <Route path='/create_task' element={<TaskForm />} />
-            <Route path='/task/:id/edit' element={<TaskForm />} />
+        <Route element={<ProtectedRoute Authenticated={isAuth} redirectTo="/login" />}>
+          <Route element={<TaskProvider><Outlet/></TaskProvider>}>
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/create_task" element={<TaskForm/>} />
+            <Route path="/task/:id/edit" element={<TaskForm />} />
           </Route>
 
-          <Route path='/profile' element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
 
-        <Route path='*' element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
 

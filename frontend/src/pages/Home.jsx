@@ -1,19 +1,9 @@
 import { Container, Card } from "../components/ui"
 import { useAuth } from "../context/AuthContext.jsx";
 
-import { useEffect } from "react";
-
 export const Home = () => {
 
-  const { isAuth, user, setIsAuth } = useAuth();
-
-  useEffect(() => {
-    if(user){
-      console.log('XD')
-      setIsAuth(true);
-    }
-  }, [])
-  
+  const { isAuth, user } = useAuth();
 
   return (
     <Container className="mt-5">
