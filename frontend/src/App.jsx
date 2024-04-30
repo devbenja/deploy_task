@@ -9,6 +9,8 @@ import { NotFound } from './pages/NotFound.jsx';
 import { Home } from './pages/Home.jsx';
 
 import { NavBar } from './components/navbar/NavBar.jsx';
+import { Card, Container } from './components/ui';
+import { ClipLoader } from 'react-spinners';
 
 import { TaskProvider } from './context/TaskContext.jsx';
 
@@ -21,7 +23,15 @@ export const App = () => {
 
   const { loading } = useAuth();
 
-  if (loading) return <h1>Loading</h1>
+  if (loading){
+    return (
+      <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
+        <Card>
+          <ClipLoader color="white" size={50} />
+        </Card>
+      </Container>
+    )
+  } 
 
   return (
     <>

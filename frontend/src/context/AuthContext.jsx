@@ -73,8 +73,7 @@ export const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        setLoading(true);
-
+    
         if (Cookie.get('jwt_token')) {
 
             axios.get('/profile')
@@ -82,15 +81,16 @@ export const AuthProvider = ({ children }) => {
                     console.log(response.data)
                     setUser(response.data);
                     setIsAuth(true);
+                    setLoading(false);
                 })
                 .catch((err) => {
                     toast.error(err);
                     setUser(null);
                     setIsAuth(false);
+                    setLoading(true);
                 })
         }
 
-        setLoading(false);
     }, []);
 
     useEffect(() => {
@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, isAuth, errors, signup, login, logout, loading }}
+            value={{ user, isAuth, errors, signup, login, logout, loading, setLoading }}
         >
             {children}
         </AuthContext.Provider>

@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { TaskCard } from "../components/tasks/TaskCard";
 import { useTasks } from "../context/TaskContext";
+import { useAuth } from "../context/AuthContext";
 
 export const Tasks = () => {
 
   const { tasks, loadTasks } = useTasks();
-
+  const { setLoading } = useAuth();
+ 
   useEffect(() => {
+    setLoading(false);
     loadTasks();
   }, []);
 
