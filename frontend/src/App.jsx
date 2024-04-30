@@ -37,8 +37,8 @@ export const App = () => {
     <>
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route element={<ProtectedRoute Authenticated={!isAuth} redirectTo="/" />}>
+        <Route element={<ProtectedRoute Authenticated={!isAuth} redirectTo="/tasks" />}>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
