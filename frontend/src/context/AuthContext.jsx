@@ -74,21 +74,21 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
 
-        setLoading(true);
-
         if (Cookie.get("jwt_token")) {
             axios.get("/profile")
                 .then((res) => {
                     setUser(res.data);
                     setIsAuth(true);
+                    setLoading(false)
                 })
                 .catch((err) => {
                     setUser(null);
                     setIsAuth(false);
+                    setLoading(false);
                 });
+        } else {
+            setLoading(false);
         }
-
-        setLoading(false);
 
     }, []);
 
