@@ -6,6 +6,7 @@ import { Register } from './pages/Register.jsx';
 import { TaskForm } from './pages/TaskForm.jsx';
 import { Tasks } from './pages/Tasks.jsx';
 import { NotFound } from './pages/NotFound.jsx';
+import { Home } from './pages/Home.jsx';
 
 import { NavBar } from './components/navbar/NavBar.jsx';
 
@@ -26,6 +27,8 @@ export const App = () => {
     <>
       <NavBar />
       <Routes>
+        <Route path='/' exact element={<Home/>}/>
+        
         <Route element={<PublicRoute />}>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

@@ -14,7 +14,9 @@ export const NavBar = () => {
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-evenly">
                     <div className="sm:block flex-1 absolute inset-y-0 right-0 hidden items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <h3 className="font-bold text-xl">TaskApp</h3>
+                        <h3 className="font-bold text-xl">
+                            <Link to="/">TaskApp</Link>
+                        </h3>
                     </div>
                     <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                         <ul className="flex space-x-4">
@@ -34,8 +36,9 @@ export const NavBar = () => {
                                         <div className="relative ml-3 flex items-center">
                                             <div>
                                                 <button type="button" className="relative flex rounded-full bg-gray-800 text-sm">
-                                                    <span className="absolute -inset-1.5"></span>
-                                                    <img className="h-7 w-7 rounded-full" src={user.gravatar} alt="profile" />
+                                                    <Link to="/profile">
+                                                        <img className="h-7 w-7 rounded-full" src={user.gravatar} alt="profile" />
+                                                    </Link>
                                                 </button>
                                             </div>
                                         </div>

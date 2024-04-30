@@ -6,7 +6,7 @@ export const PublicRoute = ({ children }) => {
   const { isAuth } = useAuth();
 
   if (isAuth) {
-    return <Navigate to="/tasks" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children ? children : <Outlet />
@@ -18,7 +18,7 @@ export const PrivateRoute = ({ children }) => {
   const { isAuth } = useAuth();
 
   if (!isAuth) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children ? children : <Outlet />

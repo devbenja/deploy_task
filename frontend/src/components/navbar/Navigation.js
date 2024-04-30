@@ -6,14 +6,10 @@ export const publicRoutes = [
     {
         name: 'Register',
         path: '/register'
-    }
+    },
 ];
 
 export const privateRoutes = [
-    {
-        name: 'Profile',
-        path: '/profile'
-    },
     {
         name: 'All Tasks',
         path: '/tasks'

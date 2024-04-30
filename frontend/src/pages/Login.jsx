@@ -20,7 +20,7 @@ export const Login = () => {
 
       if (user) {
         toast.success('Login Successful');
-        navigate('/profile');
+        navigate('/');
       }
     } catch (error) {
       toast.warning(error);

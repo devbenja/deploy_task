@@ -20,7 +20,7 @@ export const Register = () => {
 
     if (user) {
       toast.success('Register Successful')
-      navigate('/profile');
+      navigate('/');
     }
 
   });
