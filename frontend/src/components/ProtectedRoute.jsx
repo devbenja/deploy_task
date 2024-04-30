@@ -9,6 +9,7 @@ export const PublicRoute = ({ children }) => {
     return <Navigate to="/" replace />;
   }
 
+
   return children ? children : <Outlet />
 
 }

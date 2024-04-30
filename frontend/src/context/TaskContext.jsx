@@ -8,6 +8,7 @@ import {
 } from "../api/tasks.api.js";
 
 import { successAlert } from "../utils/alerts/Alerts.js";
+import { Outlet } from "react-router-dom";
 
 const TaskContext = createContext();
 
@@ -75,7 +76,7 @@ export const TaskProvider = ({ children }) => {
         <TaskContext.Provider
             value={{ tasks, loadTasks, deleteTask, createTask, errors, loadTask, updateTask }}
         >
-            {children}
+            {children ? children : <Outlet/>}
         </TaskContext.Provider>
     )
 }

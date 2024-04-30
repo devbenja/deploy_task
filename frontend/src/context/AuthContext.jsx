@@ -73,6 +73,8 @@ export const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
+
+        setLoading(true)
     
         if (Cookie.get('jwt_token')) {
 
@@ -83,16 +85,16 @@ export const AuthProvider = ({ children }) => {
                     setIsAuth(true);
                     setLoading(false);
                 })
-                .catch((err) => {
-                    toast.error(err);
+                .catch((err) => { 
+                    console.log(err)
                     setUser(null);
                     setIsAuth(false);
                     setLoading(false);
                 })
         } else {
+            setIsAuth(false);
             setLoading(false);
         }
-
 
     }, []);
 
@@ -106,7 +108,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, isAuth, errors, signup, login, logout, loading, setLoading }}
+            value={{ user, isAuth, errors, signup, login, logout, loading, setLoading, setIsAuth }}
         >
             {children}
         </AuthContext.Provider>

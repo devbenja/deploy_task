@@ -45,7 +45,7 @@ export const App = () => {
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route element={<TaskProvider><Outlet /></TaskProvider>}>
+          <Route element={<TaskProvider/>}>
             <Route path='/tasks' element={<Tasks />} />
             <Route path='/create_task' element={<TaskForm />} />
             <Route path='/task/:id/edit' element={<TaskForm />} />
