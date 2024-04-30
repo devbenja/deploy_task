@@ -23,38 +23,39 @@ export const App = () => {
 
   const { loading, isAuth } = useAuth();
 
-  if (loading) {
-    return (
-      <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
-        <Card>
-          <ClipLoader color="white" size={50} />
-        </Card>
-      </Container>
-    )
-  }
-
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route element={<ProtectedRoute Authenticated={!isAuth} redirectTo="/tasks" />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
+      {
+        loading ? (
+          <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
+            <Card>
+              <ClipLoader color="white" size={50} />
+            </Card>
+          </Container>
+        ) : (
+          <Routes>
+            <Route exact path="/" element={<Home />} />
 
-        <Route element={<ProtectedRoute Authenticated={isAuth} redirectTo="/login" />}>
-          <Route element={<TaskProvider><Outlet/></TaskProvider>}>
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/create_task" element={<TaskForm/>} />
-            <Route path="/task/:id/edit" element={<TaskForm />} />
-          </Route>
+            <Route element={<ProtectedRoute Authenticated={!isAuth} redirectTo="/tasks" />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
 
-          <Route path="/profile" element={<Profile />} />
-        </Route>
+            <Route element={<ProtectedRoute Authenticated={isAuth} redirectTo="/login" />}>
+              <Route element={<TaskProvider><Outlet /></TaskProvider>}>
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/create_task" element={<TaskForm />} />
+                <Route path="/task/:id/edit" element={<TaskForm />} />
+              </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        )
+      }
     </>
 
   )
