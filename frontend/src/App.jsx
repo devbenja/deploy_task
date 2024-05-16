@@ -21,19 +21,13 @@ import { useAuth } from './context/AuthContext.jsx';
 
 export const App = () => {
 
-  const { loading, isAuth } = useAuth();
+  const { loading, user, isAuth } = useAuth();
 
   return (
     <>
       <NavBar />
       {
-        loading ? (
-          <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
-            <Card>
-              <ClipLoader color="white" size={50} />
-            </Card>
-          </Container>
-        ) : (
+        user ? (
           <Routes>
             <Route exact path="/" element={<Home />} />
 
@@ -54,6 +48,12 @@ export const App = () => {
 
             <Route path="*" element={<NotFound />} />
           </Routes>
+        ) : (
+          <Container className="h-[calc(100vh-10rem)] flex items-center justify-center">
+            <Card>
+              <ClipLoader color="white" size={50} />
+            </Card>
+          </Container>
         )
       }
     </>
