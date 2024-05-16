@@ -81,6 +81,7 @@ export const AuthProvider = ({ children }) => {
             axios.get("/profile")
                 .then((response) => {
                     localStorage.setItem('user', JSON.stringify(response.data));
+                    setIsAuth(true);
                     setLoading(false);
                 })
                 .catch((err) => {
