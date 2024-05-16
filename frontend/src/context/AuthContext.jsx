@@ -77,11 +77,13 @@ export const AuthProvider = ({ children }) => {
         if (Cookie.get("jwt_token")) {
             axios.get("/profile")
                 .then((response) => {
+                    localStorage.setItem('user', JSON.stringify(response.data));
                     setUser(response.data);
                     setIsAuth(true);
                     setLoading(false)
                 })
                 .catch((err) => {
+                    localStorage.removeItem('user')
                     setUser(null);
                     setIsAuth(false);
                     setLoading(false);
@@ -100,6 +102,18 @@ export const AuthProvider = ({ children }) => {
 
         return () => clearTimeout(clean);
     }, [errors])
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+    
+        if (user) {
+            setUser(user);
+            setIsAuth(true);
+        }
+    
+        setLoading(false);
+    }, []);
+    
 
     return (
         <AuthContext.Provider
