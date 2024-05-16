@@ -80,9 +80,7 @@ export const AuthProvider = ({ children }) => {
         if (Cookie.get("jwt_token")) {
             axios.get("/profile")
                 .then((response) => {
-                    //localStorage.setItem('user', JSON.stringify(response.data));
-                    setUser(response.data);
-                    setIsAuth(true);
+                    localStorage.setItem('user', JSON.stringify(response.data));
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -107,9 +105,8 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             setUser(user);
             setIsAuth(true);
+            setLoading(false);
         }
-
-        setLoading(false);
 
     }, []);
     
