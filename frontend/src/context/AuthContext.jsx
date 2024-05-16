@@ -67,6 +67,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         await axios.post("/logout");
+        localStorage.removeItem('user');
         setUser(null);
         setIsAuth(false);
     };
@@ -78,12 +79,17 @@ export const AuthProvider = ({ children }) => {
             axios.get("/profile")
                 .then((response) => {
                     localStorage.setItem('user', JSON.stringify(response.data));
-                    setUser(response.data);
+
+                    const user = JSON.parse(localStorage.getItem('user'));
+
+                    console.log('Local', user)
+
+                    setUser(user);
                     setIsAuth(true);
                     setLoading(false)
                 })
                 .catch((err) => {
-                    localStorage.removeItem('user')
+                    localStorage.removeItem('user');
                     setUser(null);
                     setIsAuth(false);
                     setLoading(false);
@@ -95,24 +101,31 @@ export const AuthProvider = ({ children }) => {
 
     }, []);
 
+    
+
     useEffect(() => {
         const clean = setTimeout(() => {
             setErrors(null);
         }, 3000);
 
         return () => clearTimeout(clean);
-    }, [errors])
+    }, [errors]);
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
+    // useEffect(() => {
+    //     const user = JSON.parse(localStorage.getItem('user'));
+
+    //     console.log('Local Storage', user, 'XD');
     
-        if (user) {
-            setUser(user);
-            setIsAuth(true);
-        }
-    
-        setLoading(false);
-    }, []);
+    //     if (user) {
+    //         setUser(user);
+    //         setIsAuth(true);
+    //         setLoading(false);
+    //     } else {
+    //         setLoading(false);
+    //         setIsAuth(false);
+    //     }
+    // }, []);
+
     
 
     return (
