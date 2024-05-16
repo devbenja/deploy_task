@@ -78,18 +78,8 @@ export const AuthProvider = ({ children }) => {
         if (Cookie.get("jwt_token")) {
             axios.get("/profile")
                 .then((response) => {
-                    
                     localStorage.setItem('user', JSON.stringify(response.data));
-
-                    const user = JSON.parse(localStorage.getItem('user'));
-
-                    if (user) {
-                        console.log('Local', user)
-                        setUser(user);
-                        setIsAuth(true);
-                        setLoading(false)
-                    }
-
+                    setLoading(false);
                 })
                 .catch((err) => {
                     localStorage.removeItem('user');
@@ -105,6 +95,18 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
 
+    useEffect(() => {
+
+        const user = JSON.parse(localStorage.getItem('user'));
+ 
+        if (user) {
+            setUser(user);
+            setIsAuth(true);
+            setLoading(false);
+        }
+
+    }, []);
+    
 
     useEffect(() => {
         const clean = setTimeout(() => {
@@ -113,23 +115,7 @@ export const AuthProvider = ({ children }) => {
 
         return () => clearTimeout(clean);
     }, [errors]);
-
-    // useEffect(() => {
-    //     const user = JSON.parse(localStorage.getItem('user'));
-
-    //     console.log('Local Storage', user, 'XD');
-
-    //     if (user) {
-    //         setUser(user);
-    //         setIsAuth(true);
-    //         setLoading(false);
-    //     } else {
-    //         setLoading(false);
-    //         setIsAuth(false);
-    //     }
-    // }, []);
-
-
+    
 
     return (
         <AuthContext.Provider
