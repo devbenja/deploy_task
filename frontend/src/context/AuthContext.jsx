@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.post('/login', data);
 
             localStorage.setItem('user', JSON.stringify(response.data));
-            
+
             setUser(response.data);
             setIsAuth(true);
 
@@ -81,8 +81,6 @@ export const AuthProvider = ({ children }) => {
             axios.get("/profile")
                 .then((response) => {
                     localStorage.setItem('user', JSON.stringify(response.data));
-                    setUser(response.data);
-                    setIsAuth(true);
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -107,9 +105,8 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             setUser(user);
             setIsAuth(true);
+            setLoading(false);
         }
-
-        setLoading(false);
 
     }, []);
     
