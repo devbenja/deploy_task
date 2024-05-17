@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }) => {
                     setLoading(false);
                 });
         } else {
-            localStorage.removeItem('user');
+            
             setLoading(false);
             setIsAuth(false);
         }
